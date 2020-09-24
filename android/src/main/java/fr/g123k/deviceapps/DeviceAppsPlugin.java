@@ -53,6 +53,13 @@ public class DeviceAppsPlugin implements
         this.asyncWork = new AsyncWork();
     }
 
+    public static void registerWith(Registrar registrar) {
+        DeviceAppsPlugin plugin = new DeviceAppsPlugin();
+        plugin.context = registrar.context();
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), "g123k/device_apps");
+        channel.setMethodCallHandler(plugin);
+    }
+                
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         final MethodChannel channel = new MethodChannel(binding.getBinaryMessenger(), "g123k/device_apps");
